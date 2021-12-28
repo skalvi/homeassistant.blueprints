@@ -41,11 +41,13 @@ blueprint:
     notification_title:
       name: Notification title
       description: The title shown in the notification
+      default: Woops, you have to open something
       selector:
         text:
     notification_title:
       name: Notification message
       description: The message shown in the notification
+      default: You've forgot to open this again! 
       selector:
         text:
       
