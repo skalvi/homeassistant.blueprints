@@ -42,14 +42,10 @@ blueprint:
       name: Notification title
       description: The title shown in the notification
       default: Woops, you have to open something
-      selector:
-        text:
-    notification_title:
+    notification_message:
       name: Notification message
       description: The message shown in the notification
-      default: You've forgot to open this again! 
-      selector:
-        text:
+      default: You've forgot to open this again!
       
 trigger:
 - platform: state
@@ -79,6 +75,6 @@ action:
   domain: mobile_app
   type: notify
   message: !input notification_message
-  title: !input notification_message
+  title: !input notification_title
 
 mode: single
