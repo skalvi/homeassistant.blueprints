@@ -41,9 +41,13 @@ blueprint:
     notification_title:
       name: Notification title
       description: The title shown in the notification
+      selector:
+        text:
     notification_title:
       name: Notification message
       description: The message shown in the notification
+      selector:
+        text:
       
 trigger:
 - platform: state
