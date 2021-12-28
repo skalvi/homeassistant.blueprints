@@ -1,5 +1,19 @@
 # https://community.home-assistant.io/t/notifications-to-close-an-open-door-or-window-after-a-set-number-of-minutes/264599
-input: 
+# 
+# Home Assistant Automation Blueprint
+#
+# Sends two notifications to close a window or door after opening it, 
+# if the temperature outside is below a certain degree. 
+#
+# Revision 2
+# Roozbeh Farahbod, Jan. 2021
+#
+
+blueprint:
+  name: Notification to Close a Window 
+  description: Notification to close windows if it is cold outside
+  domain: automation
+  input: 
     contact_sensor: 
       name: Contact Sensor
       description: 'The window or door sensor that triggers the automation.'
