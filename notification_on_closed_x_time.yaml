@@ -1,21 +1,11 @@
-# https://community.home-assistant.io/t/notifications-to-close-an-open-door-or-window-after-a-set-number-of-minutes/264599
-# 
-# Home Assistant Automation Blueprint
-#
-# Sends two notifications to close a window or door after opening it, 
-# if the temperature outside is below a certain degree. 
-#
-# Revision 2
-# Roozbeh Farahbod, Jan. 2021
-#
-
+# Inspiration/template from: https://community.home-assistant.io/t/notifications-to-close-an-open-door-or-window-after-a-set-number-of-minutes/264599
 blueprint:
-  name: Notification to Close a Window 
-  description: Notification to close windows if it is cold outside
+  name: Notification when something is closed for a period
+  description: Get a notification when something is closed for a period of time. Ie. a door that should not be closed for more than 10 minutes at a time.
   domain: automation
   input: 
     contact_sensor: 
-      name: Contact Sensor
+      name: Contact´Sensor
       description: 'The window or door sensor that triggers the automation.'
       selector: 
         entity:
@@ -48,9 +38,13 @@ blueprint:
       selector: 
         device:
           integration: mobile_app
-
-# We will have two triggers, for the two different reminders. 
-# However, a reminder will be ignored if the door or window is already closed by then. 
+    notification_title:
+      name: Notification title
+      description: The title shown in the notification
+    notification_title:
+      name: Notification message
+      description: The message shown in the notification
+      
 trigger:
 - platform: state
   entity_id: !input contact_sensor
@@ -69,20 +63,16 @@ trigger:
     minutes: !input second_timer
     seconds: 0
 
-# Two conditions:
-# 1. The door or window should still be open. 
-# 2. The temperature reading must be below the set value. 
 condition:
 - condition: state
   entity_id: !input contact_sensor
   state: 'off'
 
-# Send a notification to the mobile device. 
 action:
 - device_id: !input device_identifier
   domain: mobile_app
   type: notify
-  message: 'Time to open something!.'
-  title: 'Open something!'
+  message: !input notification_message
+  title: !input notification_message
 
 mode: single
